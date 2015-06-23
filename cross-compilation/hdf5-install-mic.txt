@@ -1,0 +1,74 @@
+BUILD AND INSTALL HDF5 FOR THE INTEL XEON PHI
+Dominik Simek <xsimek23@stud.fit.vutbr.cz>
+Bachelor thesis
+FIT VUT 2015
+
+
+Download from:
+    - hdf5 site - http://www.hdfgroup.org/
+    - tested and hdf5-1.8.9 and 1.8.13
+
+
+Build && Install:
+    - install ZLIB and SZIP first
+    - if it is necessary, load intel modules
+
+        module load intel
+
+    - you must build hdf5 for the host (build for Xeon Phi will fail after some time, you have to copy some source files from host build to mic build directory)
+    - unpack hdf5 package
+    - you can create for example directories "host" and "mic" with content of hdf5-1.8.9.tar.gz
+
+        mkdir host
+        mkdir mic
+
+    - so you can start with host build, e.g.
+
+        cd host
+        ../configure --prefix=/path/to/hdf5-1.8.9/host/installed --enable-fortran --enable-cxx --enable-hl
+        make
+
+    - for the mic installation, you will have to edit (probably) following files:
+
+        configure
+            - find as_fn_error () functions, and delete (or make comment) line "as_fn_exit $as_status"
+
+        src/H5private.h
+            - replace "#define HDmkdir(S,M) mkdir(S,M)" with "#define HDmkdir(S,M) _mkdir(S)"
+
+        tools/h5copy/Makefile.in
+        tools/h5diff/Makefile.in
+        tools/h5dump/Makefile.in
+        tools/h5ls/Makefile.in
+        tools/h5stat/Makefile.in
+        tools/misc/Makefile.in
+        test/Makefile.in
+            - in this files, find lines starting with "TEST_SCRIPT = "
+            - delete all characters after "=" character to end of line
+
+    - then configure, e.g.
+
+        cd ../mic
+        ../configure --enable-hl --with-zlib=/path/to/zlib-1.2.8-mic --with-szlib=/path/to/szip-2.1-mic --prefix=/path/to/hdf5-1.8.9/mic/installed CC=icc CXX=icpc FC=ifort CFLAGS="-mmic" CXXFLAGS="-mmic" FCFLAGS="-mmic" --host=x86_64-k1om-linux
+        make
+
+    - after some time, installation will fail
+    - you have to copy /path/to/hdf5-1.8.9/host/src/H5lib_settings.c to /path/to/hdf5-1.8.9/mic/src
+
+        make
+
+    - if installation fails again, copy /path/to/hdf5-1.8.9/host/src/H5Tinit.c to /path/to/hdf5-1.8.9/mic/src/src
+
+        make
+
+    - this will cause other errors like "other_broken_file.c:(.text+0x2c66): undefined reference to `_mkdir'"
+        - 1.) you have to replace all occurrences of "HDmkdir" with "mkdir" in this file
+        - 2.) make
+        - if you get a similar error, go to step 1.)
+
+    - if build was successful, install hdf5 lib
+
+        make install
+
+    - if you want to build hdf5-1.8.13, you have edit only configure script (maybe !)
+

@@ -1,0 +1,24 @@
+var searchData=
+[
+  ['main_2ecpp',['main.cpp',['../matvec_2dynamic-aligned_2main_8cpp.html',1,'']]],
+  ['main_2ecpp',['main.cpp',['../matvec_2naive_2main_8cpp.html',1,'']]],
+  ['main_2ecpp',['main.cpp',['../matvec_2omp-parallel-mic_2main_8cpp.html',1,'']]],
+  ['main_2ecpp',['main.cpp',['../nbody_2no-jump-auto-opt_2main_8cpp.html',1,'']]],
+  ['main_2ecpp',['main.cpp',['../nbody_2offload_2main_8cpp.html',1,'']]],
+  ['main_2ecpp',['main.cpp',['../matvec_2vec-padding_2main_8cpp.html',1,'']]],
+  ['main_2ecpp',['main.cpp',['../nbody_2omp-parallel_2main_8cpp.html',1,'']]],
+  ['main_2ecpp',['main.cpp',['../nbody_2omp-parallel-mic_2main_8cpp.html',1,'']]],
+  ['main_2ecpp',['main.cpp',['../matvec_2omp-parallel_2main_8cpp.html',1,'']]],
+  ['main_2ecpp',['main.cpp',['../nbody_2cache-block-mic_2main_8cpp.html',1,'']]],
+  ['main_2ecpp',['main.cpp',['../nbody_2naive_2main_8cpp.html',1,'']]],
+  ['matvec_2ecpp',['matvec.cpp',['../omp-parallel-mic_2matvec_8cpp.html',1,'']]],
+  ['matvec_2ecpp',['matvec.cpp',['../vec-padding_2matvec_8cpp.html',1,'']]],
+  ['matvec_2ecpp',['matvec.cpp',['../dynamic-aligned_2matvec_8cpp.html',1,'']]],
+  ['matvec_2ecpp',['matvec.cpp',['../omp-parallel_2matvec_8cpp.html',1,'']]],
+  ['matvec_2ecpp',['matvec.cpp',['../naive_2matvec_8cpp.html',1,'']]],
+  ['matvec_2eh',['matvec.h',['../omp-parallel-mic_2matvec_8h.html',1,'']]],
+  ['matvec_2eh',['matvec.h',['../vec-padding_2matvec_8h.html',1,'']]],
+  ['matvec_2eh',['matvec.h',['../dynamic-aligned_2matvec_8h.html',1,'']]],
+  ['matvec_2eh',['matvec.h',['../omp-parallel_2matvec_8h.html',1,'']]],
+  ['matvec_2eh',['matvec.h',['../naive_2matvec_8h.html',1,'']]]
+];

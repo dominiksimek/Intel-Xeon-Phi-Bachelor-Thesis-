@@ -1,0 +1,39 @@
+BUILD AND INSTALL SZIP FOR THE INTEL XEON PHI
+Dominik Simek <xsimek23@stud.fit.vutbr.cz>
+Bachelor thesis
+FIT VUT 2015
+
+
+Download from:
+    - https://www.hdfgroup.org/HDF5/release/obtain5.html
+    - tested with szip-2.1.tar.gz
+
+
+Build && Install:
+    - if it is necessary, load intel modules
+
+        module load intel
+
+    - unpack package
+
+        tar -zxvf szip-2.1.tar.gz
+
+    - configure
+
+        cd szip-2.1
+        export CC=icc
+        export CXX=icpc
+        export FC=ifort
+        export CFLAGS='-O3 -mmic -ip'
+        export CXXFLAGS='-O3 -mmic -ip'
+        export FCFLAGS='-O3 -mmic -ip'
+
+        ./configure --prefix=/path/to/szip-mic-installation
+
+    - compile
+
+        make
+
+    - install
+
+        make install

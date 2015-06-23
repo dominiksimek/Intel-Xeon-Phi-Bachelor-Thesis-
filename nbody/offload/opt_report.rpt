@@ -1,0 +1,144 @@
+
+<;-1:-1;IPO VAR ADDRESSES;;0>
+  VAR ADDRESS:VARS (1)PACKS (1)
+
+
+<;-1:-1;IPO UNREFERENCED VAR REMOVING;;0>
+  UNREF VAR REMOVAL: MODULE-SYMTAB: VARS(1),PACKS (1)
+
+
+<;-1:-1;IPO VAR ADDRESSES;;0>
+  VAR ADDRESS:VARS (1)PACKS (1)
+
+
+<;-1:-1;IPO ROUTINE ATTRIBUTES PROPAGATION;;0>
+  ROUTINE ATTRIBUTE PROPAGATION TOTALS: 
+
+      RDECL: NSE(0->0), AR(0->0)
+      ENTRY: SE(0->0), DSE(0->0), AR(0->0)
+
+
+
+<;-1:-1;IPO MODREF;;0>
+  CI-MOD: TOTAL(2):OTHER(2)
+
+  CI-REF: TOTAL(2):OTHER(2)
+
+
+<;-1:-1;IPO;;0>
+WHOLE PROGRAM (SAFE) [EITHER METHOD]: false
+
+WHOLE PROGRAM (SEEN) [TABLE METHOD]: false
+
+WHOLE PROGRAM (READ) [OBJECT READER METHOD]: false
+
+INLINING OPTION VALUES:
+  -inline-factor: 100
+  -inline-min-size: 30
+  -inline-max-size: 230
+  -inline-max-total-size: 2000
+  -inline-max-per-routine: 10000
+  -inline-max-per-compile: 500000
+
+
+<nbody.cpp;208:297;IPO INLINING;_Z18particles_simulate14t_particles_DA;0>
+INLINING REPORT: (_Z18particles_simulate14t_particles_DA) [1/2=50.0%]
+
+
+
+HPO OPENMP REPORT (_Z18particles_simulate14t_particles_DA) LOG OPENED ON Mon May 18 16:12:55 2015
+
+
+<nbody.cpp;-1:-1;hpo_openmp;_Z18particles_simulate14t_particles_DA;0>
+HPO OpenMP Report (_Z18particles_simulate14t_particles_DA)
+
+nbody.cpp(213:9-213:9):OMP:_Z18particles_simulate14t_particles_DA:  OpenMP DEFINED LOOP WAS PARALLELIZED
+nbody.cpp(224:9-224:9):OMP:_Z18particles_simulate14t_particles_DA:  OpenMP DEFINED LOOP WAS PARALLELIZED
+nbody.cpp(262:9-262:9):OMP:_Z18particles_simulate14t_particles_DA:  OpenMP DEFINED LOOP WAS PARALLELIZED
+nbody.cpp(273:9-273:9):OMP:_Z18particles_simulate14t_particles_DA:  OpenMP DEFINED LOOP WAS PARALLELIZED
+nbody.cpp(285:9-285:9):OMP:_Z18particles_simulate14t_particles_DA:  OpenMP DEFINED LOOP WAS PARALLELIZED
+
+HPO VECTORIZER REPORT (_Z18particles_simulate14t_particles_DA) LOG OPENED ON Mon May 18 16:12:55 2015
+
+
+<nbody.cpp;-1:-1;hpo_vectorization;_Z18particles_simulate14t_particles_DA;0>
+HPO Vectorizer Report (_Z18particles_simulate14t_particles_DA)
+
+nbody.cpp(216:9-216:9):VEC:_Z18particles_simulate14t_particles_DA:  vectorization support: unroll factor set to 4
+LOOP WAS VECTORIZED
+PEEL LOOP WAS VECTORIZED
+REMAINDER LOOP WAS VECTORIZED
+nbody.cpp(236:13-236:13):VEC:_Z18particles_simulate14t_particles_DA:  LOOP WAS VECTORIZED
+nbody.cpp(226:9-226:9):VEC:_Z18particles_simulate14t_particles_DA:  loop was not vectorized: not inner loop
+nbody.cpp(265:9-265:9):VEC:_Z18particles_simulate14t_particles_DA:  vectorization support: unroll factor set to 2
+LOOP WAS VECTORIZED
+PEEL LOOP WAS VECTORIZED
+REMAINDER LOOP WAS VECTORIZED
+nbody.cpp(276:9-276:9):VEC:_Z18particles_simulate14t_particles_DA:  vectorization support: unroll factor set to 2
+LOOP WAS VECTORIZED
+PEEL LOOP WAS VECTORIZED
+REMAINDER LOOP WAS VECTORIZED
+nbody.cpp(288:9-288:9):VEC:_Z18particles_simulate14t_particles_DA:  vectorization support: unroll factor set to 2
+LOOP WAS VECTORIZED
+PEEL LOOP WAS VECTORIZED
+REMAINDER LOOP WAS VECTORIZED
+
+HLO REPORT LOG OPENED ON Mon May 18 16:12:55 2015
+
+
+<nbody.cpp;-1:-1;hlo;_Z18particles_simulate14t_particles_DA;0>
+High Level Optimizer Report (_Z18particles_simulate14t_particles_DA)
+Total #of lines prefetched in _Z18particles_simulate14t_particles_DA for loop at line 216=24
+Total #of lines prefetched in _Z18particles_simulate14t_particles_DA for loop at line 216=24
+Total #of lines prefetched in _Z18particles_simulate14t_particles_DA for loop at line 226=6
+Total #of lines prefetched in _Z18particles_simulate14t_particles_DA for loop at line 236=8
+Total #of lines prefetched in _Z18particles_simulate14t_particles_DA for loop at line 265=28
+Total #of lines prefetched in _Z18particles_simulate14t_particles_DA for loop at line 265=28
+Total #of lines prefetched in _Z18particles_simulate14t_particles_DA for loop at line 276=24
+Total #of lines prefetched in _Z18particles_simulate14t_particles_DA for loop at line 276=24
+Total #of lines prefetched in _Z18particles_simulate14t_particles_DA for loop at line 288=24
+Total #of lines prefetched in _Z18particles_simulate14t_particles_DA for loop at line 288=24
+
+<nbody.cpp;180:199;IPO INLINING;_Z14particles_init14t_particles_DA;0>
+INLINING REPORT: (_Z14particles_init14t_particles_DA) [2/2=100.0%]
+
+
+
+HPO OPENMP REPORT (_Z14particles_init14t_particles_DA) LOG OPENED ON Mon May 18 16:12:55 2015
+
+
+<nbody.cpp;-1:-1;hpo_openmp;_Z14particles_init14t_particles_DA;0>
+HPO OpenMP Report (_Z14particles_init14t_particles_DA)
+
+nbody.cpp(181:5-181:5):OMP:_Z14particles_init14t_particles_DA:  OpenMP DEFINED LOOP WAS PARALLELIZED
+
+HPO VECTORIZER REPORT (_Z14particles_init14t_particles_DA) LOG OPENED ON Mon May 18 16:12:55 2015
+
+
+<nbody.cpp;-1:-1;hpo_vectorization;_Z14particles_init14t_particles_DA;0>
+HPO Vectorizer Report (_Z14particles_init14t_particles_DA)
+
+nbody.cpp(182:5-182:5):VEC:_Z14particles_init14t_particles_DA:  LOOP WAS VECTORIZED
+PEEL LOOP WAS VECTORIZED
+REMAINDER LOOP WAS VECTORIZED
+
+
+<nbody.cpp;-1:-1;hlo;_Z14particles_init14t_particles_DA;0>
+High Level Optimizer Report (_Z14particles_init14t_particles_DA)
+Total #of lines prefetched in _Z14particles_init14t_particles_DA for loop at line 182=26
+
+<nbody.cpp;-1:-1;PGO;_Z18particles_simulate14t_particles_DA;0>
+  STATIC:nbody.cpp  _Z18particles_simulate14t_particles_DA
+
+<nbody.cpp;-1:-1;PGO;_Z14particles_init14t_particles_DA;0>
+  STATIC:nbody.cpp  _Z14particles_init14t_particles_DA
+
+<;-1:-1;PGO;;0>
+
+      2 FUNCTIONS HAD VALID STATIC PROFILES
+
+  IPO CURRENT  QUALITY METRIC:  50.0%
+  IPO POSSIBLE QUALITY METRIC:  50.0%
+  IPO QUALITY  METRIC RATIO:   100.0%
+
+

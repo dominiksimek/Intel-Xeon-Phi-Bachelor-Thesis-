@@ -1,0 +1,37 @@
+BUILD AND INSTALL ZLIB FOR THE INTEL XEON PHI
+Dominik Simek <xsimek23@stud.fit.vutbr.cz>
+Bachelor thesis
+FIT VUT 2015
+
+
+Download from:
+    - http://www.zlib.net
+    - tested with zlib-1.2.8.tar.gz
+
+
+Build && Install:
+    - if it is necessary, load intel modules
+
+        module load intel
+
+    - unpack zlib package
+
+        tar zxvf zlib-x.x.x.tar.gz
+
+    - configure
+
+        cd zlib-x.x.x
+        export CC=icc
+        export CXX=icpc
+        export CFLAGS="-mmic"
+        export CXXFLAGS="-mmic"
+        export LDFLAGS="-mmic"
+        ./configure --prefix=/path/to/zlib-mic-installation --64
+
+    - compile source
+
+        make
+
+    - install
+
+        make install

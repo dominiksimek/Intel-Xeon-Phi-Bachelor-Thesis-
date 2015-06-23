@@ -1,0 +1,136 @@
+%============================================================================
+% tento soubor pouzijte jako zaklad
+% (c) 2008 Michal Bidlo
+% E-mail: bidlom AT fit vutbr cz
+%============================================================================
+% kodovaní: iso-8859-2 (zmena prikazem iconv, recode nebo cstocs)
+%----------------------------------------------------------------------------
+% zpracování: make, make pdf, make desky, make clean
+% pøipomínky posílejte na e-mail: bidlom AT fit.vutbr.cz
+% vim: set syntax=tex encoding=latin2:
+%============================================================================
+\documentclass[cover,english]{fitthesis} % odevzdani do wisu - odkazy, na ktere se da klikat
+%\documentclass[cover,print]{fitthesis} % pro tisk - na odkazy se neda klikat
+%\documentclass[english,print,cover]{fitthesis} % pro tisk - na odkazy se neda klikat
+%      \documentclass[english]{fitthesis}
+% * Je-li prace psana v anglickem jazyce, je zapotrebi u tridy pouzit 
+%   parametr english nasledovne:
+%      \documentclass[english]{fitthesis}
+% * Neprejete-li si vysazet na prvni strane dokumentu desky, zruste 
+%   parametr cover
+
+% zde zvolime kodovani, ve kterem je napsan text prace
+% "latin2" pro iso8859-2 nebo "cp1250" pro windows-1250, "utf8" pro "utf-8"
+%\usepackage{ucs}
+\usepackage[latin2]{inputenc}
+\usepackage[T1, IL2]{fontenc}
+\usepackage{url}
+\DeclareUrlCommand\url{\def\UrlLeft{<}\def\UrlRight{>} \urlstyle{tt}}
+
+%zde muzeme vlozit vlastni balicky
+
+
+% =======================================================================
+% balíèek "hyperref" vytváøí klikací odkazy v pdf, pokud tedy pou¾ijeme pdflatex
+% problém je, ¾e balíèek hyperref musí být uveden jako poslední, tak¾e nemù¾e
+% být v ¹ablonì
+\ifWis
+\ifx\pdfoutput\undefined % nejedeme pod pdflatexem
+\else
+  \usepackage{color}
+  \usepackage[unicode,colorlinks,hyperindex,plainpages=false,pdftex]{hyperref}
+  \definecolor{links}{rgb}{0.4,0.5,0}
+  \definecolor{anchors}{rgb}{1,0,0}
+  \def\AnchorColor{anchors}
+  \def\LinkColor{links}
+  \def\pdfBorderAttrs{/Border [0 0 0] }  % bez okrajù kolem odkazù
+  \pdfcompresslevel=9
+\fi
+\fi
+
+%Informace o praci/projektu
+%---------------------------------------------------------------------------
+\projectinfo{
+  %Prace
+  project=BP,            %typ prace BP/SP/DP/DR
+  year=2015,             %rok
+  date=\today,           %datum odevzdani
+  %Nazev prace
+  title.cs={Efektivní implementace výpoèetnì nároèných algoritmù na Intel Xeon Phi},  %nazev prace v cestine
+  title.en={Efficient Implementation of High Performance Algorithms on Intel Xeon Phi}, %nazev prace v anglictine
+  %Autor
+  author={Dominik ©imek},   %jmeno prijmeni autora
+  %author.title.p=Bc., %titul pred jmenem (nepovinne)
+  %author.title.a=PhD, %titul za jmenem (nepovinne)
+  %Ustav
+  department=UPSY, % doplnte prislusnou zkratku: UPSY/UIFS/UITS/UPGM
+  %Skolitel
+  supervisor= Jiøí Jaro¹, %jmeno prijmeni skolitele
+  supervisor.title.p=Ing.,   %titul pred jmenem (nepovinne)
+  supervisor.title.a={Ph.D.},    %titul za jmenem (nepovinne)
+  %Klicova slova, abstrakty, prohlaseni a podekovani je mozne definovat 
+  %bud pomoci nasledujicich parametru nebo pomoci vyhrazenych maker (viz dale)
+  %===========================================================================
+  %Klicova slova
+  keywords.cs={Intel Xeon Phi, k-Wave, MIC, N-Body, Súèin matíc, Súèin matice a vektora, Výpoètovo nároèné algoritmy, I-vektor.}, %klicova slova v ceskem jazyce
+  keywords.en={Intel Xeon Phi, k-Wave, MIC, N-Body, Matrix multiplication, Matrix vector multiplication, HPC, I-vector.}, %klicova slova v anglickem jazyce
+  %Abstract
+  abstract.cs={Táto práca sa zaoberá implementáciou a optimalizáciou výpoètovo nároèných algoritmov na koprocesore Intel Xeon Phi. Koprocesor Xeon Phi bol predstavený firmou Intel v roku 2012 ako odpoveï na obrovský nárast v pou¾ívaní technológie GPGPU. Xeon Phi disponuje podstatne väè¹ím výkonom ako procesor, preto je podobne ako GPGPU vhodnou platformou pre beh výpoètovo nároèných programov. Xeon Phi zatiaµ v praxi nie je velmi pou¾ívaný, preto je potrebné hµada» mo¾né oblasti uplatnenia. Rozrastá sa ale jeho pou¾itie v superpoèítaèových centrách, napríklad Milky Way 2\,--\,Guangzhou (Èina), Salomon\,--\,Ostrava. Cieµom tohto dokumentu je oboznámi» èitateµa s problematikou implementácie nároèných algoritmov na akceleraènej karte Xeon Phi, ich optimalizácie a meranie výkonu. Výkon koprocesoru Intel Xeon Phi bude porovnávaný s výkonom procesorov Intel Xeon. 
+  \newline \indent V teoretickej èasti práce bude èitateµ oboznámený s architektúrou a princípmi koprocesoru Xeon Phi. Budeme sa venova» výhodám ale aj nevýhodám tohto koprocesoru, ktoré budú èasto porovnávané s v¹eobecnými vlastnos»ami procesorov. Témou bude taktie¾ otázka, kedy je vhodné zvoli» pre výpoèet akcelereènú kartu Xeon Phi a kedy procesor. Detailne si vysvetlíme a znázorníme výber vhodných algoritmov pre Xeon Phi, postup ich implementácie, optimalizácie a meranie výkonu. Okrem toho budú rozoberané problémy a úskalia, ktoré mô¾u nasta» pri implementácii algoritmov a pou¾ívaní koprocesoru.
+  \newline \indent Dané demon¹trujeme najskôr na uká¾kových problémoch, ktoré boli rie¹ené na Ostravskom superpoèítaèi Anselm. V prvom rade to budú jednoduché benchamrky typu násobenie matíc, násobenie matice a vektora, na ktorých budú ukázané základné princípy implementácie optimálnych algoritmov pre koprocesor Xeon Phi. Napríklad pri benchmarku násobenia matice a vektora bolo dosiahnutých asi 6.5\% teoretického výkonu koprocesoru. Ïal¹ím, komplexnej¹ím problémom bude \uv{N-Body Simulation}\,--\,simulácia pohybu èastíc v priestore, na ktorom sme otestovali potenciál Xeon Phi. Výkon koprocesoru sa pri tomto benchmarku vy¹plhal a¾ na viac ako 35\% teoretického výkonu\,--\,725 gFLOPS (maximálny výkon 2000 gFLOPS pre dáta s jednoduchou presnos»ou). Èitateµ sa okrem iného mô¾e dozvedie» aj zaujímavé informácie z oblasti fyzikálnych simulácií, konkrétne bude reè o module pre MATLAB (k-Wave). K-Wave sa zaoberá simuláciou ¹írenia akustických vån v 1D, 2D a 3D, èo sa vyu¾íva napríklad pri simulácii ¹írenia ultrazvukových vån v mäkkých tkanivách. Na koniec si struène povieme o portovaní u¾ existujúcich kni¾níc, modulov èi programov na Xeon Phi zo snahou vyu¾itia jeho potenciálu. Bude to napríklad kroskompilácia kni¾níc HDF5, ZLIB èi konca interpretu jazyka Python s modulmi Numpy a Scipy.}, % abstrakt v ceskem jazyce
+  abstract.en={This thesis is dedicated to the implementation of high performance algorithms on the Intel Xeon Phi coprocessor. The Xeon phi was introduced by Intel as a new MIC (Many Integrated Core) architecture in 2012. The theoretical part of the thesis is focused on the architecture of the coprocessor (with peak performance of 2 tFLOPS for a single precision data) and on the procedure of algorithms implementation and optimization. The theoretical knowledge is then applied to a practical examples with demonstration of the implementation and  the optimization of algorithms and work with the coprocessor. In the practical part of the thesis, simple benchmarks such as a vector matrix multiplication and a matrix multiplication are explained and implemented. In the first benchmark 6.5\% of theoretical coprocessor performance was achieved, in the second it was much more. In following chapter a more complex benchmark\,--\,simulation of a particles system (N-Body), that reached more than 35\% of coprocessor performance (725 gFLOPS), is discussed. The following section is dedicated to some interesting problems such as optimization of a MATLAB module k-Wave (propagation  of the ultrasound waves), extraction of I-vector (speech processing), cross-compilation of existing libraries, modules and programs. In the conclusion of the thesis the usage the potential of the Intel Xeon Phi is evaluated.}, % abstrakt v anglickem jazyce
+  %Prohlaseni
+  declaration={Prohla¹uji, ¾e jsem tuto bakaláøskou práci vypracoval samostatnì pod vedením pana Ing. Jiøího Jaro¹a, Ph.D. Uvedl jsem v¹echny literární prameny a publikace, ze kterých jsem èerpal.},
+  %Podekovani (nepovinne)
+  acknowledgment={I would like to thank my supervisor Ing. Jiøí Jaro¹, Ph.D. who provided me a valuable advice and experiences. Without his help and guidance this thesis would not have been possible. Many thanks also Doc. Dr. Ing. Jan Èernocký, Ing. Tomá¹ Ka¹párek and Ing. Ondøej Glembek, Ph.D. who enabled me to enrich my thesis on a new ideas and experiences. I acknowledge and thank very much the IT4Innovations Centre of Excellence project (CZ.1.05/1.1.00/02.0070), funded by the European Regional Development Fund and the national budget of the Czech Republic via the Research and Development for Innovations Operational Programme, as well as Czech Ministry of Education, Youth and Sports via the project Large Research, Development and Innovations Infrastructures (LM2011033).} % nepovinne
+}
+
+%Abstrakt (cesky, anglicky)
+%\abstract[cs]{Do tohoto odstavce bude zapsán výtah (abstrakt) práce v èeském jazyce.}
+%\abstract[en]{Do tohoto odstavce bude zapsán výtah (abstrakt) práce v anglickém jazyce.}
+
+%Klicova slova (cesky, anglicky)
+%\keywords[cs]{Sem budou zapsána jednotlivá klíèová slova v èeském jazyce, oddìlená èárkami.}
+%\keywords[en]{Sem budou zapsána jednotlivá klíèová slova v anglickém jazyce, oddìlená èárkami.}
+
+%Prohlaseni
+%\declaration{Prohla¹uji, ¾e jsem tuto bakaláøskou práci vypracoval samostatnì pod vedením pana X...
+%Dal¹í informace mi poskytli...
+%Uvedl jsem v¹echny literární prameny a publikace, ze kterých jsem èerpal.}
+
+%Podekovani (nepovinne)
+%\acknowledgment{V této sekci je mo¾no uvést podìkování vedoucímu práce a tìm, kteøí poskytli odbornou pomoc
+%(externí zadavatel, konzultant, apod.).}
+
+\begin{document}
+  % Vysazeni titulnich stran
+  % ----------------------------------------------
+  \maketitle
+  % Obsah
+  % ----------------------------------------------
+  \tableofcontents
+  
+  % Seznam obrazku a tabulek (pokud prace obsahuje velke mnozstvi obrazku, tak se to hodi)
+  % \listoffigures
+  % \listoftables 
+
+  % Text prace
+  % ----------------------------------------------
+  \input{obsah} % viz. obsah.tex
+
+  % Pouzita literatura
+  % ----------------------------------------------
+%\def\UrlBreaks{\do\/\do-}
+\ifczech
+  \bibliographystyle{czechiso}
+\else 
+  \bibliographystyle{plain}
+%  \bibliographystyle{alpha}
+\fi
+  \begin{flushleft}
+  \bibliography{literatura} % viz. literatura.bib
+  \end{flushleft}
+  \appendix
+  
+  \input{prilohy} % viz. prilohy.tex
+\end{document}
